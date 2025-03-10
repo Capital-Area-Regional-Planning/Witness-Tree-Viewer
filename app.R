@@ -27,13 +27,12 @@ registerPlugin <- function(map, plugin) {
   map$dependencies <- c(map$dependencies, list(plugin))
   map}
 
-
-speciesFilterChoices <- read.csv("species_choices.csv") %>% 
-  mutate(index = row_number()-1,
-         visible = 0)
-
 speciesLegend <- read.csv("species_legend.csv")
 
+speciesFilterChoices <- speciesLegend %>% 
+  select(Species) %>% 
+  mutate(index = row_number()-1,
+         visible = 0)
 
 jsCode <- "
 shinyjs.refreshTrees = function(speciesVisiblity){
@@ -53,7 +52,9 @@ shinyjs.refreshTrees = function(speciesVisiblity){
 var treeGroup = L.layerGroup().addTo(map);
 
   //show the selected species
-	var trees = L.esri.Vector.vectorTileLayer('https://vectortileservices1.arcgis.com/4NZ4Ghri2AQmNOuO/arcgis/rest/services/Witness_trees_vector_tiles/VectorTileServer', {
+	//var trees = L.esri.Vector.vectorTileLayer('https://vectortileservices1.arcgis.com/4NZ4Ghri2AQmNOuO/arcgis/rest/services/Witness_trees_vector_tiles/VectorTileServer', {
+  var trees = L.esri.Vector.vectorTileLayer('https://vectortileservices1.arcgis.com/4NZ4Ghri2AQmNOuO/arcgis/rest/services/Witness_Trees_Color/VectorTileServer', {
+ 
     style: function (style) {
     
       for (let i = 0; i < speciesVisiblity[0].length; i++) { 
@@ -86,9 +87,12 @@ ui <- fluidPage(
     layout_sidebar(
       sidebar = sidebar(
         bg = "lightgrey",
+        "It was common practice in the 1830s for land surveyors in Wisconsin to use trees as landmarks. 
+        This web map of historic survey records gives a glimpse of the canopy prior to mass European settlement in Wisconsin.
+        Filter by tree species below:",
         pickerInput(
           "speciesFilter",
-          "species",
+          "Species",
           choices = speciesFilterChoices$Species,
           multiple = T,
           options = list(`actions-box` = TRUE)

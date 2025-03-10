@@ -1,30 +1,26 @@
 Species,Color
-Aspen,#CFD0FD
-Basswood,#B3FEB3
-Beech,#FFD9B5
-Black ash,#B4FEF4
-Black oak,#FDB8CC
-Bur oak,#FEB3FA
-Cedar,#EBFFD2
-Cherry,#B7B4FE
-Cottonwood,#FDF4B2
-Elm,#CBF4FF
-Fir,#FCD7FE
-Hemlock,#B8FDD2
-Hickory,#FDD3D2
-Ironwood,#DCFFB7
-Jack pine,#FEBDB2
-Maple,#DEBEFD
-Oak,#B8DAFE
-Other,#FEE8D7
-Pine,#D3FFE4
-Red oak,#FCBFEA
-Red pine,#D0E7FF
-Spruce,#FED4EA
-Sugar maple,#FEE9C5
-Tamarack,#BBC4FD
-White ash,#CDFEF5
-White birch,#D0C4FF
-White oak,#D5FDCB
-White pine,#FFB4BB
-Yellow birch,#FECFB8
+Aspen,#FFFF00
+Basswood,#7AF5CA
+Beech,#267300
+Black ash,#B4D79E
+Black oak,#FFEBBE
+Bur oak,#732600
+Cedar,#FFBEBE
+Elm,#737300
+Fir,#D69DBC
+Hemlock,#4C0073
+Hickory,#FFAA00
+Ironwood,#FF00C5
+Jack pine,#FF5500
+Maple,#5C8944
+Other,#E1E1E1
+Red oak,#F5CA7A
+Red pine,#FF0000
+Spruce,#E8BEFF
+Sugar maple,#38A800
+Tamarack,#BED2FF
+White ash,#00A9E6
+White birch,#FFFFBE
+White oak,#A87000
+White pine,#FFA77F
+Yellow birch,#7AB6F5
