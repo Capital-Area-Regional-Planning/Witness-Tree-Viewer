@@ -15,8 +15,8 @@ library(shinyWidgets)
 #https://developers.arcgis.com/esri-leaflet/styles-and-data-visualization/style-vector-tiles/
 #https://developers.arcgis.com/documentation/portal-and-data-services/data-services/vector-tile-services/introduction/
 
-VectorTilePlugin <- htmlDependency("esri-leaflet-vector", "4.2.3",
-                                   src = c(href = "https://unpkg.com/esri-leaflet-vector@4/dist/"),
+VectorTilePlugin <- htmlDependency("esri-leaflet-vector", "4.2.8",
+                                   src = c(href = "https://unpkg.com/esri-leaflet-vector@4.2.8/dist"),
                                    script = "esri-leaflet-vector.js")
 
 esriPlugin <- htmlDependency("leaflet.esri", "1.0.3",
@@ -54,9 +54,8 @@ var treeGroup = L.layerGroup().addTo(map);
   //show the selected species
 	//var trees = L.esri.Vector.vectorTileLayer('https://vectortileservices1.arcgis.com/4NZ4Ghri2AQmNOuO/arcgis/rest/services/Witness_trees_vector_tiles/VectorTileServer', {
   var trees = L.esri.Vector.vectorTileLayer('https://vectortileservices1.arcgis.com/4NZ4Ghri2AQmNOuO/arcgis/rest/services/Witness_Trees_Color/VectorTileServer', {
- 
+
     style: function (style) {
-    
       for (let i = 0; i < speciesVisiblity[0].length; i++) { 
         style.layers[i].paint['circle-opacity'] = speciesVisiblity[0][i];
         
@@ -80,6 +79,7 @@ var treeGroup = L.layerGroup().addTo(map);
 }"
 
 ui <- fluidPage(
+  tags$head(includeScript("google-analytics.html")),
   useShinyjs(),
   extendShinyjs(text = jsCode, functions = c("refreshTrees")),
   card(
@@ -117,7 +117,6 @@ server <- function(input, output, session) {
         ")
   })
   
-  
   #refresh tree layer when the species filter or zoom level changes 
   #pass in a boolean array showing which layers should be visible
   observe ({
@@ -139,10 +138,12 @@ server <- function(input, output, session) {
     filteredLegend <- speciesLegend %>% 
       filter(Species %in% input$speciesFilter)
     
+    if (nrow(filteredLegend > 0)) {
     par(bg = "lightgrey")
     plot(NULL, xaxt='n',yaxt='n',bty='n',ylab='',xlab='', xlim=0:1, ylim=0:1)
     legend("right", legend = filteredLegend$Species, pch=16, pt.cex=1.5, cex=1,
            col = filteredLegend$Color, xpd = TRUE, ncol = 2, bg = "white")
+    }
   }) })%>% 
     bindEvent(c(input$speciesFilter))
 }
